@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Daje-Templates.iml" filepath="$PROJECT_DIR$/.idea/Daje-Templates.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Daje-Generate-Templates.iml" filepath="$PROJECT_DIR$/Daje-Generate-Templates.iml" />
     </modules>
   </component>
 </project>

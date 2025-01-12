@@ -1,7 +1,5 @@
-package Daje::Templates;
-use 5.008001;
-use strict;
-use warnings;
+package Daje::Generate::Templates;
+use Mojo::Base -base;
 
 our $VERSION = "0.01";
 

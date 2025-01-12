@@ -1,4 +1,4 @@
-
+[![Actions Status](https://github.com/janeskil1525/Daje-Generate-Templates/actions/workflows/test.yml/badge.svg)](https://github.com/janeskil1525/Daje-Generate-Templates/actions)
 # NAME
 
 Daje::Templates - It's new $module
