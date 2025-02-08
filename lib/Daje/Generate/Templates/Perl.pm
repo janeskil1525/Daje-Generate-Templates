@@ -208,7 +208,7 @@ use Mojo::Base '<<base_name_space>><<base_class_name>>', -base, -signatures;
 
 @@ view_fields_method
 has 'fields' => "<<select_fields>>";
-has 'primary_keyse' => "<<primary_keys>>";
+has 'primary_keys' => "<<primary_keys>>";
 has 'foreign_keys' => "foreign_keys"
 has 'view_name' => "<<view_name>>";
 
