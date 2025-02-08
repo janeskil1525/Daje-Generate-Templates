@@ -154,7 +154,7 @@ sub load_pkey($<<primary_key>>) {
 @@ load_from_fkey
 sub load_<<foreign_key>>($<<foreign_key>> ) {
 
-    my $result = $self->load__fkey(
+    my $result = $self->load_fkey(
         $table_name,
         $fields,
         '<<foreign_key>>',
