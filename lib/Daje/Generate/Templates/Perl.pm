@@ -201,9 +201,7 @@ use Mojo::Base '<<base_name_space>><<base_class_name>>', -base, -signatures;
 # Any manual changes to this class will be overwritten next time its generated
 
 <<fields>>
-<<pkey>>
-<<fkey>>
-<<select>>
+
 <<methods>>
 
 @@ view_fields_method
