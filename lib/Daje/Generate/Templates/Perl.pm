@@ -143,9 +143,9 @@ use Mojo::Base '<<name_space>><<classname>>', -base, -signatures;
 sub load_pkey($self, $<<primary_key>>) {
 
     my $result = $self->load_pk(
-        $table_name,
-        $fields,
-        $primary_key_name,
+        $self->table_name,
+        $self->fields,
+        $self->primary_key_name,
         $<<primary_key>>
     );
     return $result;
@@ -155,8 +155,8 @@ sub load_pkey($self, $<<primary_key>>) {
 sub load_<<foreign_key>>($self, $<<foreign_key>> ) {
 
     my $result = $self->load_fkey(
-        $table_name,
-        $fields,
+        $self->table_name,
+        $self->fields,
         '<<foreign_key>>',
         $<<foreign_key>>
     );
@@ -166,8 +166,8 @@ sub load_<<foreign_key>>($self, $<<foreign_key>> ) {
 @@ load_list
 sub load_list($self, $key_value) {
     my $result = $self->load_a_list(
-        $table_name,
-        $fields,
+        $self->table_name,
+        $self->fields,
         $key_value
     );
     return $result;
@@ -175,13 +175,13 @@ sub load_list($self, $key_value) {
 
 @@ insert_data
 sub insert_<<table_name>>($self, $data) {
-    my $result = $self->insert($table_name, $data);
+    my $result = $self->insert($self->table_name, $data);
     return $result;
 }
 
 @@ update_data
 sub update_<<table_name>>($self, $data, $keys) {
-    my $result = $self->update($table_name, $data, $keys)
+    my $result = $self->update($self->table_name, $data, $keys)
     return $result;
 }
 
