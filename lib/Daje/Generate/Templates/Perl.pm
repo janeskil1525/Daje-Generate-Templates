@@ -31,6 +31,7 @@ has 'fields' => "<<select_fields>>";
 has 'primary_key_name' => "<<primary_key>>";
 has 'table_name' => "<<table_name>>";
 
+
 @@ method
 
 sub <<method_name>> ($self, <<parameters>>) {
@@ -47,59 +48,77 @@ use v5.40;
 
 has 'db';
 
-sub load_pk($self, $table, $select, $primary_key_name, $primary_key) {
+sub load_from_index($self, $table, $select, $condition ) {
     my $result->{result} = 1;
-    eval {
+    try {
         my $load = $self->db->select(
             $table,
-                [$select],
+                $select,
+                $condition
+        );
+        $result->{data} = {};
+        $result->{data} = $load->hash if $load and $load->rows > 0;
+    } catch ($e) {
+        $result->{result} = 0;
+        $result->{data} = "";
+        $result->{error} = $e;
+    };
+
+    return $result;
+
+}
+
+sub load_pk($self, $table, $select, $primary_key_name, $primary_key) {
+    my $result->{result} = 1;
+    try {
+        my $load = $self->db->select(
+            $table,
+                $select,
                 {$primary_key_name => $primary_key}
         );
         $result->{data} = {};
         $result->{data} = $load->hash if $load and $load->rows > 0;
-    };
-    if($@) {
+    } catch ($e) {
         $result->{result} = 0;
         $result->{data} = "";
-        $result->{error} = $@;
+        $result->{error} = $e;
     };
+
     return $result;
 };
 
 sub load_fkey($self, $table, $select, $foreign_key_name, $foreign_key) {
     my $result->{result} = 1;
-    eval {
+    try {
         my $load = $self->db->select(
             $table,
-                [$select],
+                $select,
             {$foreign_key_name => $foreign_key}
         );
         $result->{data} = {};
         $result->{data} = $load->hashes if $load and $load->rows > 0;
-    };
-    if($@) {
+    } catch ($e) {
         $result->{result} = 0;
         $result->{data} = "";
-        $result->{error} = $@;
+        $result->{error} = $e;
     };
     return $result;
 }
 
 sub load_a_list($self, $table, $select, $key_value) {
     my $result->{result} = 1;
-     eval {
+     try {
         my $load = $self->db->select(
             $table,
-                [$select],
+                $select,
             {$key_value}
         );
         $result->{data} = {};
         $result->{data} = $load->hashes if $load and $load->rows > 0;
-    };
-     if($@) {
+    } catch ($e) {
         $result->{result} = 0;
         $result->{data} = "";
-        $result->{error} = $@;
+        $result->{error} = $e;
     };
 
     return $result;
@@ -126,11 +145,10 @@ sub insert($self, $table, $data, $primary_key_name) {
 
 sub update($self, $table, $data, $keys) {
     my $result->{result} = 1;
-    eval {
+    try {
         $self->db->update($table, $data, $keys);
-    };
-     if($@) {
-        $result->{error} = $@;
+    } catch($e) {
+        $result->{error} = $e;
         $result->{result} = 0;
     }
     return $result;
@@ -148,6 +166,18 @@ use Mojo::Base '<<name_space>><<classname>>', -base, -signatures;
 
 
 1;
+
+@@ select_from_index
+sub load_<<method_name>> ($self, <<parameters>>) {
+
+    my $result = $self->load_from_index(
+        $self->table_name,
+        $self->fields,
+        {<<condition>>}
+    );
+    return $result;
+};
+
 @@ load_from_pkey
 sub load_pkey($self, $<<primary_key>>) {
 
